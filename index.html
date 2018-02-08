@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>多列展示且后面出现展开收起</title>
+    <style>
+        .multiline-ellipsis {
+            width: 200px;
+            border: 1px solid;
+            height: 44px;
+            overflow: hidden;
+        }
+
+        .multiline-ellipsis-shape {
+            float: right;
+            height: 44px;
+            width: 60px;
+            padding-right: 10px;
+            vertical-align: bottom;
+            -webkit-shape-outside: inset(40px 0 0 0);
+            shape-outside: inset(40px 0 0 0);
+        }
+
+        .multiline-ellipsis-ellipsis {
+            display: table-cell;
+            height: inherit;
+            width: inherit;
+            vertical-align: bottom;
+        }
+
+        .multiline-ellipsis-operate {
+            display: table-cell;
+            height: inherit;
+            width: inherit;
+            vertical-align: bottom;
+        }
+    </style>
+    <style>
+        .open {
+            height: auto;
+        }
+
+        .less {
+            padding-right: 10px;
+            float: right;
+            display: none;
+        }
+
+        .open .more {
+            display: none;
+        }
+
+        .open .less {
+            display: inline;
+        }
+
+        #container {
+            resize: horizontal;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>多列展示且后面出现展开收起</h3>
+    <b>缺点一大堆，先列举下其缺点:</b>
+    <ul>
+        <li>只支持chrome和手机端浏览器</li>
+        <li>好几个地方都使用像素计算高度和宽度,使用的时候需要自己调试到符合自己项目的高宽</li>
+        <li>展开按钮(当然也可以是其他的东西,自己写)一定是在期望的最后一列右侧,即使文字只有一行它也会这样</li>
+        <li>当文字长度不够的时候,省略号依然会显示出来</li>
+        <li>因为它有如此多的缺点,我就不写成插件了(主要是因为上面第二条)</li>
+    </ul>
+    <div id="container" class="multiline-ellipsis">
+        <div class="multiline-ellipsis-shape more">
+            <div class="multiline-ellipsis-ellipsis">
+                ...
+            </div>
+            <div class="multiline-ellipsis-operate">
+                <a id="more" href="#">更多</a>
+            </div>
+        </div>
+        <span>这是一段文字这是一段文字这是一段文字这是一段文字 这是一段文字这是一段文字这是一段文字这是一段文字 这是一段文字这是一段文字这是一段文字这是一段文字 这是一段文字这是一段文字这是一段文字这是一段文字这是文字</span>
+        <a id="less" class="less" href="#">收起</a>
+    </div>
+    <script>
+        document.querySelector("#more").addEventListener("click", function () {
+            document.querySelector("#container").classList.add("open");
+        });
+        document.querySelector("#less").addEventListener("click", function () {
+            document.querySelector("#container").classList.remove("open");
+        });
+    </script>
+</body>
+
+</html>
